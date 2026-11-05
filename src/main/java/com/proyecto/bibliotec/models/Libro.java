@@ -1,5 +1,6 @@
 package com.proyecto.bibliotec.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,15 @@ public class Libro {
     private Long id;
 
     private String titulo;
-    private String autor;
     private String isbn;
-}
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    @JsonIgnoreProperties("libros")
+    private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "autor_id")
+    @JsonIgnoreProperties("libros")
+    private Autor autor;
+}

@@ -39,3 +39,59 @@ RF5 | Consultas filtradas | Buscar libros por título, autor o categoría y list
 2. Seleccionar "Reopen in Container".
 3. Ejecutar `./mvnw spring-boot:run`.
 4. Visitar `http://localhost:8080/hello`.
+
+
+
+
+## Relaciones del modelo
+
+Relaciones 1 a muchos:
+- Una **Categoría** tiene muchos **Libros**.
+- Un **Autor** tiene muchos **Libros**.
+
+```mermaid
+erDiagram
+    CATEGORIA ||--o{ LIBRO : "contiene"
+    AUTOR ||--o{ LIBRO : "escribe"
+
+    CATEGORIA {
+        Long id PK
+        String nombre
+    }
+    AUTOR {
+        Long id PK
+        String nombre
+        String nacionalidad
+    }
+    LIBRO {
+        Long id PK
+        String titulo
+        String isbn
+        Long categoria_id FK
+        Long autor_id FK
+    }
+```
+
+```mermaid
+classDiagram
+    class Categoria {
+        -Long id
+        -String nombre
+        -List~Libro~ libros
+    }
+    class Autor {
+        -Long id
+        -String nombre
+        -String nacionalidad
+        -List~Libro~ libros
+    }
+    class Libro {
+        -Long id
+        -String titulo
+        -String isbn
+        -Categoria categoria
+        -Autor autor
+    }
+    Categoria "1" --> "*" Libro
+    Autor "1" --> "*" Libro
+```
