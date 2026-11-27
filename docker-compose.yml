@@ -1,0 +1,14 @@
+services:
+  bibliotec:
+    build: .
+    container_name: bibliotec-api
+    ports:
+      - "8080:8080"
+    # Para usar tu propio secreto JWT (Base64, mínimo 32 bytes), descomenta:
+    # environment:
+    #   JWT_SECRET: "pega_aqui_el_resultado_de_openssl_rand_-base64_32"
+    volumes:
+      - bibliotec-data:/app/data
+
+volumes:
+  bibliotec-data:

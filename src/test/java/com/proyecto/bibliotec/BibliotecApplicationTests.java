@@ -3,11 +3,10 @@ package com.proyecto.bibliotec;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.datasource.url=jdbc:h2:mem:testdb")
 class BibliotecApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {
+    }
 }
